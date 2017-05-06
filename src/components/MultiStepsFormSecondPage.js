@@ -23,6 +23,7 @@ export default class MultiStepsFormSecondPage extends React.Component {
 
   getDateError(){
     const {fields, errors} = this.props.fieldsState;
+    if(!errors) return null;
     const {birthdayDay, birthdayMonth, birthdayYear} = fields;
     if(birthdayDay && birthdayDay.touched && errors.birthdayDay){
       return errors.birthdayDay
