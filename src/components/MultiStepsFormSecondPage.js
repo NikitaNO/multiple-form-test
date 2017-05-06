@@ -8,7 +8,7 @@ import moment from 'moment';
   form: 'multi',
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
-  // validate,
+  validate,
 })
 export default class MultiStepsFormSecondPage extends React.Component {
   render() {

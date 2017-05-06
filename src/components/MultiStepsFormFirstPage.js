@@ -9,7 +9,7 @@ import FooterForm from './FooterForm';
   form: 'multi',
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
-  // validate,
+  validate,
 })
 export default class MultiStepsFormFirstPage extends React.Component{
   render() {
