@@ -19,8 +19,6 @@ body {
     z-index: 900;
     width: 400px;
     margin-top: 20px;
-    flex-direction: column;
-    display: flex;
     border-radius: 7px;
     border: 1.5px solid $darkGrey;
     box-shadow: $default-shadow;
@@ -108,5 +106,16 @@ body {
       width: 100%;
       margin: 20px;
     }
+  }
+}
+
+.form-page-wrapper{
+  display: flex;
+  flex-direction: column;
+  opacity: 1;
+  transition: opacity .4s ease-out;
+  will-change: opacity;
+  &.loading {
+    opacity: 0;
   }
 }

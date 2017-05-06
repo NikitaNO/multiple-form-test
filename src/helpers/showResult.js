@@ -4,6 +4,7 @@ import moment from 'moment';
 
 export default function showResults() {
     const formData = store.getState().form.multi.values;
+    debugger
     let data = {};
     const date_of_birth = moment(`${formData.birthdayDay}/${formData.birthdayMonth}/${formData.birthdayYear}`).format('X');
     const how = formData.how_hear_about_us || null;
