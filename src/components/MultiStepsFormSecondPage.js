@@ -3,6 +3,7 @@ import {Field, reduxForm} from 'redux-form';
 import { renderDate, renderError, renderSelector } from '../helpers/formComponets';
 import FooterForm from './FooterForm';
 import moment from 'moment';
+import {connect} from 'react-redux'
 
 @reduxForm({
   form: 'multi',
@@ -10,12 +11,40 @@ import moment from 'moment';
   forceUnregisterOnUnmount: true,
   validate,
 })
+@connect((state) => {
+  return {
+    fieldsState:{
+      fields:state.form.multi.fields,
+      errors:state.form.multi.syncErrors
+    }
+  }
+})
 export default class MultiStepsFormSecondPage extends React.Component {
+
+  getDateError(){
+    const {fields, errors} = this.props.fieldsState;
+    const {birthdayDay, birthdayMonth, birthdayYear} = fields;
+    if(birthdayDay && birthdayDay.touched && errors.birthdayDay){
+      return errors.birthdayDay
+    }
+    if(birthdayMonth && birthdayMonth.touched && errors.birthdayMonth){
+      return errors.birthdayMonth
+    }
+    if(birthdayYear && birthdayYear.touched && errors.birthdayYear){
+      return errors.birthdayYear
+    }
+    return null;
+  }
+
   render() {
     const {handleSubmit, previousPage} = this.props;
+    const dateError = this.getDateError() ;
+
     return (
       <form className="second-form" onSubmit={handleSubmit}>
-        <label className="main-label">DATE OF BIRTH</label>
+        <label className="main-label">
+          {dateError ? <span className="error">{dateError}</span> : "DATE OF BIRTH"}
+        </label>
         <div className="date-wrapper">
           <Field
             name="birthdayDay"
@@ -94,25 +123,23 @@ function validate(values) {
   const errors = {};
   // Birthday day
   if (!values.birthdayDay) {
-    errors.birthdayDay = 'Required';
+    errors.birthdayDay = 'Day is Required';
   } else if (values.birthdayDay > 31 || values.birthdayDay < 1) {
-    errors.birthdayDay = 'Invalid';
+    errors.birthdayDay = "Invalid Day";
   }
 
   // Birthday month
   if (!values.birthdayMonth) {
-    errors.birthdayMonth = 'Required';
+    errors.birthdayMonth = 'Month is Required';
   } else if (values.birthdayMonth > 12 || values.birthdayMonth < 1) {
-    errors.birthdayMonth = 'Invalid';
-  } else if (values.birthdayMonth.length < 2) {
-    errors.birthdayMonth = 'Invalid';
+    errors.birthdayMonth = 'Invalid Month';
   }
 
   // Birthday year
   if (!values.birthdayYear) {
-    errors.birthdayYear = 'Required';
+    errors.birthdayYear = 'Year Is Required';
   } else if (values.birthdayYear.length != 4) {
-    errors.birthdayYear = 'Invalid';
+    errors.birthdayYear = 'Invalid Year';
   } else {
     const userDate = new Date(`${values.birthdayYear}-${values.birthdayMonth}-${values.birthdayDay}`);
     const isAdult = moment(userDate, "YYYYMMDD").fromNow().split(' ')[0];
@@ -125,7 +152,7 @@ function validate(values) {
 
   // Sex
   if (!values.sex) {
-    errors.sex = 'Required';
+    errors.sex = 'Sex Required';
   }
   return errors;
 }

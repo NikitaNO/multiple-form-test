@@ -18,7 +18,6 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => (
 const renderDate = ({ input, label, type, placeholder, meta: { touched, error } }) => (
   <div className="field-wrapper-date">
     <input {...input} type={type} placeholder={placeholder} min="0"/>
-    {touched && error && <label className="error-date">{error}</label>}
   </div>
 );
 
