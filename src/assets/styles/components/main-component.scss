@@ -17,12 +17,12 @@ body {
     position: fixed;
     top: 0;
     z-index: 900;
-    min-width: 800px;
+    width: 400px;
     margin-top: 20px;
     flex-direction: column;
     display: flex;
     border-radius: 7px;
-    border: 1px solid $darkGrey;
+    border: 1.5px solid $darkGrey;
     box-shadow: $default-shadow;
     .form-header {
       text-align: center;
@@ -34,12 +34,12 @@ body {
       }
     }
     .progressbar-wrapper {
-      height: 20px;
+      height: 10px;
       border-top: 1px solid $darkGrey;
       border-bottom: 1px solid $darkGrey;
       width: 100%;
       .progressbar {
-        background-color: $blue;
+        background-color: $lightBlue;
         height: 100%;
         -webkit-transition: width 1s ease-in-out;
         -moz-transition: width 1s ease-in-out;
